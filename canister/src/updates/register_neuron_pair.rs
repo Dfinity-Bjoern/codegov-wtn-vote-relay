@@ -2,6 +2,7 @@ use crate::{state, RegisterNeuronPairArgs, RegisterNeuronPairError};
 use candid::CandidType;
 use ic_cdk::api::call::CallResult;
 use ic_cdk::update;
+use ic_cdk::api::trap;
 use ic_principal::Principal;
 use serde::{Deserialize, Serialize};
 
@@ -13,6 +14,11 @@ async fn register_neuron_pair(
 ) -> Result<u64, RegisterNeuronPairError> {
     let caller = ic_cdk::caller();
     let wtn_governance_canister = state::read(|s| s.wtn_governance_canister_id());
+    let admin = state::read(|s| s.admin());
+
+    if caller != admin {
+        trap("Caller not authorized to call the canister.")
+    }
 
     match call_get_neuron(wtn_governance_canister, args.wtn_neuron_id).await {
         Ok(response) => match response.0.result.unwrap() {

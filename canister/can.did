@@ -3,6 +3,7 @@ type InitArgs = record {
   wtn_governance_canister_id : opt principal;
   nns_governance_canister_id : opt principal;
   wtn_protocol_canister_id : opt principal;
+  admin : principal;
 };
 type InitOrUpgradeArgs = variant { Upgrade : record {}; Init : InitArgs };
 type NeuronPairPublic = record {

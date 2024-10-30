@@ -21,6 +21,7 @@ struct InitArgs {
     nns_governance_canister_id: Option<Principal>,
     wtn_governance_canister_id: Option<Principal>,
     wtn_protocol_canister_id: Option<Principal>,
+    admin: Principal,
 }
 
 #[derive(CandidType, Serialize, Deserialize, Debug, Default)]

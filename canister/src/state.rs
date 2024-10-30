@@ -22,6 +22,7 @@ pub struct State {
     nns_governance_canister_id: Principal,
     wtn_governance_canister_id: Principal,
     wtn_protocol_canister_id: Principal,
+    admin: Principal,
     neuron_pairs: BTreeMap<u64, NeuronPair>,
     votes_to_process: VecDeque<VoteToProcess>,
 }
@@ -65,6 +66,7 @@ impl State {
             wtn_protocol_canister_id: args
                 .wtn_protocol_canister_id
                 .unwrap_or(DEFAULT_WTN_PROTOCOL_CANISTER_ID),
+            admin: args.admin,
             neuron_pairs: BTreeMap::new(),
             votes_to_process: VecDeque::new(),
         }
@@ -80,6 +82,10 @@ impl State {
 
     pub fn wtn_protocol_canister_id(&self) -> Principal {
         self.wtn_protocol_canister_id
+    }
+
+    pub fn admin(&self) -> Principal {
+        self.admin
     }
 
     pub fn list_neuron_pairs(&self) -> Vec<NeuronPairPublic> {
