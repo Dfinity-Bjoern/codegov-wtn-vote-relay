@@ -1,6 +1,6 @@
 {
   "canisters": {
-    "codegov-wtn-vote-relay": {
+    "dfinity-wtn-vote-relay": {
       "candid": "canister/can.did",
       "package": "codegov_wtn_vote_relay",
       "type": "rust"
